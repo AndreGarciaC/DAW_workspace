@@ -6,7 +6,6 @@ class Main implements EventListenerObject, HandleResponse{
     private personas: Array<Persona> =new Array();
     constructor(per:Persona) {
         this.personas.push(per);
-
         console.log(this);
     }
     public addPersona(per: Persona) {
@@ -14,6 +13,13 @@ class Main implements EventListenerObject, HandleResponse{
     }
     public getPersona(){
         return this.personas;
+    }
+
+    add_user()
+    {
+        let new_name = <HTMLInputElement>document.getElementById("input-field");
+        let new_per = new Persona(new_name);
+    per1.edad = 12;
     }
 
     cosultarDispositivoAlServidor() {
@@ -142,6 +148,7 @@ window.addEventListener("load", () => {
     let main: Main = new Main(per1);
     main.addPersona(new Persona("Pepe"));
     mostrar(main);
+    main.handleEvent
     let btn = document.getElementById("btnSaludar");
     btn.addEventListener("click", main);
     let btn2 = document.getElementById("btnOtro");
