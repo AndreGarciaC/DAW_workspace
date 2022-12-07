@@ -26,3 +26,8 @@ span.negrita{
     color: brown;
     background-color: brown;
 }
+
+#modal_btn
+{
+    text-align: right;
+}
