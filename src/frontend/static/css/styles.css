@@ -10,12 +10,10 @@ main {
 }
 
 
-img.imgloanding{
-    width: 100px;
-    height: 60px;
+#loading{
     position: fixed;
-    top:  30%;
-    left: 50%;
+    width: 70%;
+    visibility: hidden;
 }
 span.negrita{
     color: brown;
@@ -31,3 +29,6 @@ span.negrita{
 {
     text-align: right;
 }
+
+.carousel .carousel-item {
+    width:40% !important;}

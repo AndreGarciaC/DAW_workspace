@@ -27,12 +27,7 @@
     <script type="text/javascript" src="js/main.js"></script>
   </head>
   <body>
-    <img
-      id="loading"
-      class="imgloanding"
-      src="static/images/loading.gif"
-      hidden
-    />
+    
     <main>
       <!-- Navigation bar -->
       <nav style="background-color: #124580">
@@ -41,7 +36,7 @@
             >Smart Home</a
           >
           <ul id="nav-mobile" class="right" style="margin-right: 15px">
-            <li><a href="#">Help</a></li>
+            <li><a id="usr_msg" href="#">User Unknown</a></li>
           </ul>
         </div>
       </nav>
@@ -52,73 +47,73 @@
         <br />
 
         <div class="row">
-          <div class="col s12 m6 l4 xl4" style="background-color: red">
-            a
-            <a
-              class="waves-effect waves-light btn modal-trigger"
-              href="#modalAlta"
-              >Abrir</a
-            >
-          </div>
-
-          <div
-            class="col s12 m6 l4 xl4"
-            style="background-color: rgb(111, 255, 0)"
-          >
-            b
-          </div>
-
-          <div
-            class="col s12 m12 l4 xl4"
-            style="background-color: rgb(0, 94, 255)"
-          >
-            c
-          </div>
-        </div>
-
-        <div class="row">
-          <div id="cajaDisp"></div>
-            <div class="container section">
-              <div class="row">
-                  <p class="lighten-2">This is your first panel</p>
-              </div>
-              <div class="row">
-                <div class="col s6">
-                  <div id="devices_carousel" class="carousel carousel-slider center">
-                    <div class="carousel-fixed-item center clearfix">
-                    </div>
-                    <a href="" class="carousel-item">
-                      <img src="static/images/light.gif">
-                    </a>
-                    <a href="" class="carousel-item">
-                      <img src="static/images/imagen.gif">
-                    </a>
-                    <a href="" class="carousel-item">
-                      <img src="static/images/sonido.gif">
-                    </a>
-                  </div>
+          <div class="container-section">
+            <div class="row">
+              <p class="lighten-2">This is your first panel</p>
+            </div>
+            <div class="row">
+              <div class="col s12">
+                <div
+                  id="devices_carousel"
+                  class="carousel carousel-slider center"
+                >
+                
+                  <div class="carousel-fixed-item center clearfix"></div>
+                  <a href="" class="carousel-item">
+                    <img src="static/images/light.gif" />
+                  </a>
+                  <a href="" class="carousel-item">
+                    <img src="static/images/imagen.gif" />
+                  </a>
+                  <a href="" class="carousel-item">
+                    <img src="static/images/sonido.gif" />
+                  </a>
                 </div>
               </div>
             </div>
-           
-          <div class="col s12 m4 l2 xl2">
-            <button
-              class="btn waves-effect waves-light button-view"
-              id="btnDevices"
-              name="hello_button"
-            >
-              Devices
-            </button>
           </div>
-          <div class="col s12 xl2">
-            <button
-              class="btn waves-effect waves-light button-view"
-              id="btnOtro"
-              name="hello_button"
-            >
-              Otro
-            </button>
+
+          <div class="row"> 
+            <div id="loading" class="progress">
+                <div class="indeterminate"></div>
+            </div>
+        </div>
+
+          <div id="cajaDisp"></div>
+          <div class="row">
+            <div class="col s12">
+                <div class="col s1">
+                    <button
+                    class="btn waves-effect waves-light button-view"
+                    id="btnDevices"
+                    name="hello_button"
+                    >
+                    Resumen
+                    </button>
+                </div>
+                <div class="col s1">
+                    <button
+                    class="btn waves-effect waves-light button-view"
+                    id="btnAdd"
+                    name="hello_button"
+                    disabled
+                    >
+                    Nuevo
+                    </button>
+                </div>
+                <div class="col s1">
+                    <button
+                    class="btn waves-effect waves-light button-view"
+                    id="btnDlt"
+                    name="hello_button"
+                    disabled
+                    >
+                    Eliminar
+                    </button>
+                </div>
+              </div>
           </div>
+          
         </div>
       </div>
     </main>
@@ -140,7 +135,11 @@
           </div>
         </div>
         <div class="row">
-          <a href="https://www.flaticon.es/iconos-animados-gratis" title="café iconos animados">Iconos animados creados por Freepik - Flaticon</a>
+          <a
+            href="https://www.flaticon.es/iconos-animados-gratis"
+            title="café iconos animados"
+            >Iconos animados creados por Freepik - Flaticon</a
+          >
         </div>
       </div>
     </footer>
@@ -188,12 +187,20 @@
             <label for="usr_name">Nombre</label>
           </div>
           <div class="input-field col s5">
-            <input id="usr_age" type="number" class="validate" min="1" max="105"/>
+            <input
+              id="usr_age"
+              type="number"
+              class="validate"
+              min="1"
+              max="105"
+            />
             <label for="usr_age">Edad</label>
           </div>
         </div>
-        <div id= "modal_btn" class="row">
-        <a class="btn-floating btn-large waves-effect waves-light blue-grey"><i class="material-icons">check_circle</i></a>
+        <div id="modal_btn" class="row">
+          <a class="btn-floating btn-large waves-effect waves-light blue-grey"
+            ><i class="material-icons">check_circle</i></a
+          >
         </div>
       </div>
     </div>

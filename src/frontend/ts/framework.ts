@@ -29,10 +29,10 @@ class Framework{
 
   public mostrarCargando() {
     let imgLoading = document.getElementById("loading");
-    imgLoading.hidden = false;
+    imgLoading.style.visibility = 'visible';
   }
   public ocultarCargando() {
     let imgLoading = document.getElementById("loading");
-    imgLoading.hidden = true;
+    imgLoading.style.visibility = 'hidden';
   }
 }

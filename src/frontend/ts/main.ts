@@ -4,21 +4,16 @@ class Main implements EventListenerObject, HandleResponse {
 
   private framework: Framework = new Framework();
   private personas: Array<Persona> = new Array();
+  
   constructor(per: Persona) {
     this.personas.push(per);
     console.log(this);
   }
+  
   public getPersona() {
     return this.personas;
   }
 
-  public add_user() {
-    let new_name = <HTMLInputElement>document.getElementById("usr_name");
-    let new_age = <HTMLInputElement>document.getElementById("usr_age");
-    let new_per = new Persona(new_name.value);
-    new_per.edad = Number(new_age.value);
-    this.personas.push(new_per);
-  }
 
   cosultarDispositivoAlServidor() {
     this.framework.ejecutarRequest(
@@ -74,11 +69,10 @@ class Main implements EventListenerObject, HandleResponse {
 
     cajaDips.innerHTML = grilla;
 
-    for (let disp of listaDisp) {
+    for (let disp of listaDisp){
       let cb = document.getElementById("cb_" + disp.id);
       cb.addEventListener("click", this);
     }
-
     this.framework.ocultarCargando();
   }
 
@@ -88,14 +82,19 @@ class Main implements EventListenerObject, HandleResponse {
     let objEvento: HTMLElement;
     objEvento = <HTMLElement>object.target;
 
-    if (objEvento.id == "btnOtro") {
+    if (objEvento.id == "usr_msg") {
       console.log(objEvento.id, objEvento.textContent);
-      let iNombre = <HTMLInputElement>document.getElementById("iNombre");
-      objEvento.textContent = iNombre.value;
-      alert("hola " + this.personas[0].getNombre() + " estoy en el main");
+      alert("Hola. Gestiona tu casa inteligente controlando todos tus dispositivos");
+      
     } else if (objEvento.id == "btnDevices") {
       this.framework.mostrarCargando();
       this.cosultarDispositivoAlServidor();
+      var btn= document.getElementById("btnDevices");
+      btn.setAttribute('disabled','');
+      var btn= document.getElementById("btnAdd");
+      btn.removeAttribute('disabled');
+      var btn= document.getElementById("btnDlt");
+      btn.removeAttribute('disabled');
     } else if (objEvento.id.startsWith("cb_")) {
       let idDisp = objEvento.id.substring(3);
 
@@ -105,12 +104,8 @@ class Main implements EventListenerObject, HandleResponse {
           " -" +
           (<HTMLInputElement>objEvento).checked
       );
-    } else if (objEvento.id == "modal_btn") {
-      this.add_user();
-      var modal_welcome = document.getElementById("modalWelcome");
-      var instance = M.Modal.getInstance(modal_welcome);
-      instance.close();
-    }else {
+
+    } else {
       objEvento = <HTMLElement>objEvento.parentElement;
 
       if (objEvento.id == "btnAdd") {
@@ -148,21 +143,18 @@ window.addEventListener("load", () => {
 
   M.updateTextFields();
 
-  let user: Usuario = new Usuario("Juan", "jperez", "jperez@gmail.com");
-  let per1 = new Persona("Matias");
-  per1.edad = 12;
-  let main: Main = new Main(per1);
-  main.add_user();
+  user_welcoming();
+  let person = new Persona(document.getElementById("usr_msg").textContent);
+  let main: Main = new Main( person);
   mostrar(main);
-  user_welcoming(main);
   main.handleEvent;
-
+  
   let btnM = document.getElementById("modal_btn");
   btnM.addEventListener("click", main);
   let btn = document.getElementById("btnDevices");
   btn.addEventListener("click", main);
-  let btn2 = document.getElementById("btnOtro");
-  btn2.addEventListener("click", main);
+  let btn_usr = document.getElementById("usr_msg");
+  btn_usr.addEventListener("click", main);
   let btnAdd = document.getElementById("btnAdd");
   btnAdd.addEventListener("click", main);
 });
@@ -175,9 +167,26 @@ function mostrar(main: Main) {
   }
 }
 
-function user_welcoming(main: Main) {
-  console.log("Bienvenido");
+function user_welcoming() {
   var modal_welcome = document.getElementById("modalWelcome");
   var instance = M.Modal.getInstance(modal_welcome);
   instance.open();
+  document.getElementById('modal_btn').onclick = function() {
+    add_user();
+    close_user_welcoming();
+ }
 }
+
+function close_user_welcoming() {
+    var modal_welcome = document.getElementById("modalWelcome");
+    var instance = M.Modal.getInstance(modal_welcome);
+    instance.close();
+  }
+
+function add_user(){
+    let new_name = <HTMLInputElement>document.getElementById("usr_name");
+    let new_age = <HTMLInputElement>document.getElementById("usr_age");
+    let new_per = new Persona(new_name.value);
+    new_per.edad = Number(new_age.value);
+    document.getElementById("usr_msg").innerHTML = "Hola " + new_name.value;
+  }
