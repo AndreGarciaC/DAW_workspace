@@ -1,6 +1,7 @@
 declare const M;
 
 class Main implements EventListenerObject, HandleResponse {
+
   private framework: Framework = new Framework();
   private personas: Array<Persona> = new Array();
   constructor(per: Persona) {
@@ -89,9 +90,7 @@ class Main implements EventListenerObject, HandleResponse {
 
     if (objEvento.id == "btnOtro") {
       console.log(objEvento.id, objEvento.textContent);
-
       let iNombre = <HTMLInputElement>document.getElementById("iNombre");
-
       objEvento.textContent = iNombre.value;
       alert("hola " + this.personas[0].getNombre() + " estoy en el main");
     } else if (objEvento.id == "btnDevices") {
@@ -107,10 +106,10 @@ class Main implements EventListenerObject, HandleResponse {
           (<HTMLInputElement>objEvento).checked
       );
     } else if (objEvento.id == "modal_btn") {
-        this.add_user();
-        var modal_welcome = document.getElementById("modalWelcome");
-        var instance = M.Modal.getInstance(modal_welcome);
-        instance.close();
+      this.add_user();
+      var modal_welcome = document.getElementById("modalWelcome");
+      var instance = M.Modal.getInstance(modal_welcome);
+      instance.close();
     }else {
       objEvento = <HTMLElement>objEvento.parentElement;
 
@@ -131,19 +130,23 @@ class Main implements EventListenerObject, HandleResponse {
   }
 }
 
-
 window.addEventListener("load", () => {
   var elems = document.querySelectorAll("select");
   var instances = M.FormSelect.init(elems, "");
 
-  var elemB = document.querySelectorAll('.fixed-action-btn');
+  var elemB = document.querySelectorAll(".fixed-action-btn");
   var instances = M.FloatingActionButton.init(elemB, "");
-  
 
-  M.updateTextFields();
+  var elemC = document.querySelectorAll('.carousel');
+  var instances = M.Carousel.init(elemC, {
+    duration:500,
+    numVisible:3
+  });
 
   var elemsM = document.querySelectorAll(".modal");
   var instances = M.Modal.init(elemsM, "");
+
+  M.updateTextFields();
 
   let user: Usuario = new Usuario("Juan", "jperez", "jperez@gmail.com");
   let per1 = new Persona("Matias");
@@ -162,7 +165,6 @@ window.addEventListener("load", () => {
   btn2.addEventListener("click", main);
   let btnAdd = document.getElementById("btnAdd");
   btnAdd.addEventListener("click", main);
-  console.log(btnAdd);
 });
 
 function mostrar(main: Main) {
@@ -173,11 +175,9 @@ function mostrar(main: Main) {
   }
 }
 
-function user_welcoming(main:Main){
-    console.log("Bienvenido");
-    M.updateTextFields();
-    var modal_welcome = document.getElementById("modalWelcome");
-    var instance = M.Modal.getInstance(modal_welcome);
-    instance.open();
+function user_welcoming(main: Main) {
+  console.log("Bienvenido");
+  var modal_welcome = document.getElementById("modalWelcome");
+  var instance = M.Modal.getInstance(modal_welcome);
+  instance.open();
 }
-
