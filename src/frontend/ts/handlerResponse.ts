@@ -1,3 +1,3 @@
 interface HandleResponse{
-  cargarGrilla(listaDisp: Array<Device>);
+  load_devices_grid(dvcs_list: Array<Device>);
 }

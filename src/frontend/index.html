@@ -17,6 +17,15 @@
       href="./static/css/styles.css"
       media="screen,projection"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fredericka+the+Great"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Mali"
+    />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="text/javascript" src="static/js/materialize.min.js"></script>
 
@@ -27,25 +36,65 @@
     <script type="text/javascript" src="js/main.js"></script>
   </head>
   <body>
-    
     <main>
+      <!-- User Welcome Modal -->
+      <div id="modalWelcome" class="modal">
+        <div class="modal-content">
+          <div class="row">
+            <h4>Bienvenido</h4>
+            <h5>Ingrese su nombre y edad por favor.</h5>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <i class="material-icons prefix">account_circle</i>
+              <input id="usr_name" type="text" class="validate" />
+              <label for="usr_name">Nombre</label>
+            </div>
+            <div class="input-field col s5">
+              <input
+                id="usr_age"
+                type="number"
+                class="validate"
+                min="1"
+                max="105"
+              />
+              <label for="usr_age">Edad</label>
+            </div>
+          </div>
+          <div id="modal_btn" class="row">
+            <a class="btn-floating btn-large waves-effect waves-light blue-grey"
+              ><i class="material-icons">check_circle</i></a
+            >
+          </div>
+        </div>
+      </div>
+
       <!-- Navigation bar -->
       <nav style="background-color: #124580">
         <div class="nav-wrapper">
-          <a href="#!" class="brand-logo left" style="margin-left: 15px"
-            >Smart Home</a
+          <a
+            id="app_title"
+            href="#!"
+            class="brand-logo left"
+            style="margin-left: 15px"
           >
+            Smart Home
+          </a>
           <ul id="nav-mobile" class="right" style="margin-right: 15px">
             <li><a id="usr_msg" href="#">User Unknown</a></li>
           </ul>
         </div>
       </nav>
-      <!-- Page Body -->
+      <!-- Page Headers -->
       <div class="container">
         <br />
-        <h3>Smart Home Web Client!</h3>
+        <h3>
+          <span id="app_title">Smart Home</span>
+          <span style="font-family: 'Mali', serif">Web Client</span>
+        </h3>
         <br />
 
+        <!-- Devices Carousel -->
         <div class="row">
           <div class="container-section">
             <div class="row">
@@ -57,7 +106,6 @@
                   id="devices_carousel"
                   class="carousel carousel-slider center"
                 >
-                
                   <div class="carousel-fixed-item center clearfix"></div>
                   <a href="" class="carousel-item">
                     <img src="static/images/light.gif" />
@@ -73,50 +121,90 @@
             </div>
           </div>
 
-          <div class="row"> 
+          <!-- Devices management -->
+          <div class="row">
             <div id="loading" class="progress">
-                <div class="indeterminate"></div>
+              <div class="indeterminate"></div>
             </div>
-        </div>
+          </div>
 
           <div id="cajaDisp"></div>
           <div class="row">
             <div class="col s12">
-                <div class="col s1">
-                    <button
-                    class="btn waves-effect waves-light button-view"
-                    id="btnDevices"
-                    name="hello_button"
-                    >
-                    Resumen
-                    </button>
-                </div>
-                <div class="col s1">
-                    <button
-                    class="btn waves-effect waves-light button-view"
-                    id="btnAdd"
-                    name="hello_button"
-                    disabled
-                    >
-                    Nuevo
-                    </button>
-                </div>
-                <div class="col s1">
-                    <button
-                    class="btn waves-effect waves-light button-view"
-                    id="btnDlt"
-                    name="hello_button"
-                    disabled
-                    >
-                    Eliminar
-                    </button>
-                </div>
+              <div class="col s1">
+                <button
+                  class="btn waves-effect waves-light button-view"
+                  id="btnDevices"
+                  name="hello_button"
+                >
+                  Resumen
+                </button>
               </div>
+              <div class="col s1">
+                <button
+                  class="btn waves-effect waves-light button-view"
+                  id="btn_add"
+                  name="hello_button"
+                  disabled
+                >
+                  Nuevo
+                </button>
+              </div>
+              <div class="col s1">
+                <button
+                  class="btn waves-effect waves-light button-view"
+                  id="btnDlt"
+                  name="hello_button"
+                  disabled
+                >
+                  Eliminar
+                </button>
+              </div>
+            </div>
           </div>
-          
         </div>
       </div>
     </main>
+
+    <!-- Add Device Modal -->
+    <div id="modal_device" class="modal">
+      <div class="modal-content">
+        <div class="row">
+          <h5>Ingrese las características del nuevo dispositivo.</h5>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="dvc_id" type="number" class="validate" />
+            <label for="dvc_id">ID del dispositivo</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="dvc_name" type="text" class="validate" />
+            <label for="dvc_name">Nombre del dispositivo</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="dvc_descp" type="text" class="validate" />
+            <label for="dvc_descp">Descripción del dispositivo</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="dvc_type" type="number" class="validate" max="6" />
+            <label for="dvc_type">Tipo del dispositivo</label>
+          </div>
+        </div>
+
+        
+
+        <div class="row">
+            <button
+              class="btn waves-effect waves-light button-view"
+              id="modal_dvc_btn"><i class="material-icons">check_circle</i>
+            </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Page Footer -->
     <footer class="page-footer" style="background-color: #124580">
       <div class="container">
@@ -143,66 +231,5 @@
         </div>
       </div>
     </footer>
-    <!--JavaScript at end of body for optimized loading-->
-
-    <div id="modalAlta" class="modal">
-      <div class="modal-content">
-        <div class="row">
-          <div class="input-field col s6">
-            <select multiple id="selectColores">
-              <option value="" disabled selected>Seleccione</option>
-              <option value="rojo">Rojo</option>
-              <option value="verde">Verde</option>
-              <option value="azul">Azul</option>
-            </select>
-            <label>Color de luz</label>
-          </div>
-          <div class="input-field col s6">
-            <input id="txtNombre" type="text" class="validate" />
-            <label for="txtNombre">Nombre</label>
-          </div>
-          <div id="slider"></div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <a
-          id="btnAdd"
-          class="btn-floating btn-large waves-effect waves-light red"
-        >
-          <i class="material-icons">add</i>
-        </a>
-      </div>
-    </div>
-
-    <div id="modalWelcome" class="modal">
-      <div class="modal-content">
-        <div class="row">
-          <h4>Bienvenido</h4>
-          <h5>Ingrese su nombre y edad por favor.</h5>
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <i class="material-icons prefix">account_circle</i>
-            <input id="usr_name" type="text" class="validate" />
-            <label for="usr_name">Nombre</label>
-          </div>
-          <div class="input-field col s5">
-            <input
-              id="usr_age"
-              type="number"
-              class="validate"
-              min="1"
-              max="105"
-            />
-            <label for="usr_age">Edad</label>
-          </div>
-        </div>
-        <div id="modal_btn" class="row">
-          <a class="btn-floating btn-large waves-effect waves-light blue-grey"
-            ><i class="material-icons">check_circle</i></a
-          >
-        </div>
-      </div>
-    </div>
   </body>
 </html>

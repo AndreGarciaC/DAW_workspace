@@ -1,4 +1,7 @@
-
+html * 
+{
+    font-family: "Mali", serif;
+}
 body {
     display: flex;
     min-height: 100vh;
@@ -30,5 +33,12 @@ span.negrita{
     text-align: right;
 }
 
-.carousel .carousel-item {
-    width:40% !important;}
+.carousel .carousel-item
+{
+    width:40% !important;
+}
+
+#app_title
+{
+    font-family: "Fredericka the Great", serif;
+}
