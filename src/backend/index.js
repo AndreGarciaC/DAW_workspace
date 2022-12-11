@@ -56,7 +56,7 @@ app.get('/devices/:id', function(req, res) {
 
 app.post('/devices/', function(req, res) {
    // utils.query("Update Devices set state = ? where id = ? ",[req.body.state, req.body.id],function(err,ans){
-      utils.query("INSERT INTO`Devices (`id`,`name`,`description`,`state`,`type`) VALUES (?, ?, ?, ?,?);",[req.body.id, req.body.name, req.body.description, , req.body.state, , req.body.type],function(err,ans){
+      utils.query("INSERT INTO Devices (id,name,description,state,type) VALUES (?, ?, ?, ?, ?);",[req.body.id, req.body.name, req.body.description,req.body.state, req.body.type],function(err,ans){
         if(err){
             res.send(err).status(400);
             return;

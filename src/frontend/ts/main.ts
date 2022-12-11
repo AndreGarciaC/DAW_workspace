@@ -141,19 +141,18 @@ class Main implements EventListenerObject, HandleResponse {
       var modal_device = document.getElementById("modal_device");
       var instance = M.Modal.getInstance(modal_device);
       instance.open();
-      document.getElementById("modal_btn").onclick = function () {
-        add_user();
-        close_user_welcoming();
-      };
-    } else if (objEvento.id == "modal_dvc_btn") {
-        console.log("modal cerrado");
+      instance.options.onCloseEnd = () => {
+        console.log("saved");
         let dvc = add_device();
+        console.log("device"+dvc);
         this.ask_server_add_device(dvc.id,dvc.name,dvc.state,dvc.description,dvc.type);
-        var modal_device = document.getElementById("modal_device");
-        var instance = M.Modal.getInstance(modal_device);
-        instance.close();
+        this.framework.mostrarCargando();
+        this.ask_server_for_device();
       }
-      else {
+      document.getElementById("modal_dvc_btn").onclick = function () {
+        instance.close();
+      };
+    } else {
       objEvento = <HTMLElement>objEvento.parentElement;
     }
   }
