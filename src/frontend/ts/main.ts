@@ -95,6 +95,7 @@ class Main implements EventListenerObject, HandleResponse {
                   </label>
                 </div>
           </a>
+          <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
           </li>`;
     }
     grilla += "</ul>";
@@ -173,6 +174,9 @@ window.addEventListener("load", () => {
 
   var elemsM = document.querySelectorAll(".modal");
   var instances = M.Modal.init(elemsM, "");
+
+  var elemsT = document.querySelectorAll('.tooltipped');
+  var instances = M.Tooltip.init(elemsT, "");
 
   M.updateTextFields();
 
