@@ -5,17 +5,25 @@
 Web App Full Stack Base
 =======================
 
-*Ayudaría mucho si apoyaras este proyecto con una ⭐ en Github!*
+Este proyecto consiste en el proyecto final de la asignatura *Desarrollo de Aplicaciones Web*
 
-Este proyecto es una aplicación web fullstack que se ejecuta sobre el ecosistema `Docker`. Está compuesta por un compilador de `TypeScript` que te permite utilizar este superset de JavaScript para poder programar un `cliente web`. También tiene un servicio en `NodeJS` que te permite ejecutar código en backend y al mismo tiempo disponibilizar el código del cliente web para interactar con el servicio. Además tiene una `base de datos` MySQL que puede interactuar con el backend para guardar y consultar datos, y de manera adicional trae un `administrador` de base de datos para poder administrar la base en caso que lo necesites.
+El concepto principal consiste en una aplicación Web cuya interfaz permite al usuario interactuar de manera centralizada con todos los dispositivos inteligentes de su hogar. Los tipos de dispositivos posibles de agregar, eliminar y controlar son cinco: 
 
-La aplicación IoT de base que viene con este proyecto se encarga de crear una tabla llamada `Devices` en la base de datos, y la idea es que vos puedas desarrollar el código de backend y frontend que te permita controlar desde el navegador el estado de los devices de un hogar inteligente - *como pueden ser luces, TVs, ventiladores, persianas, enchufes y otros* - y almacenar los estados de cada uno en la base de datos. 
+Iluminación
+
+Persianas o cortinas
+
+Audio
+
+Bloqueo de puertas
+
+Chimeneas automáticas.
+
+La aplicación IoT de base que viene con este proyecto se encarga de crear una tabla llamada `Devices` en la base de datos en la cual las modificaciones realizadas en la aplicación son reflejadas.
 
 Realizando estas tareas vas a a tener una aplicación fullstack IoT del mundo real que utiliza tecnologías actuales en la que un backend es capaz de interactuar con una DB para cumplir con las peticiones de control que se le mandan desde el cliente web.
 
 En esta imagen podés ver una posible implementación del cliente web que controla los artefactos del hogar.
-
-![architecture](doc/webapp-example-1.png)
 
 ## Comenzando 🚀
 
@@ -25,7 +33,7 @@ Esta sección es una guía con los pasos escenciales para que puedas poner en ma
 
 ### Instalar las dependencias
 
-Para correr este proyecto es necesario que instales `Docker` y `Docker Compose`. 
+Para correr este proyecto es necesario instalar `Docker` y `Docker Compose`. 
 
 En [este artículo](https://www.gotoiot.com/pages/articles/docker_installation_linux/) publicado en nuestra web están los detalles para instalar Docker y Docker Compose en una máquina Linux. Si querés instalar ambas herramientas en una Raspberry Pi podés seguir [este artículo](https://www.gotoiot.com/pages/articles/rpi_docker_installation) de nuestra web que te muestra todos los pasos necesarios.
 
@@ -35,7 +43,7 @@ Continua con la descarga del código cuando tengas las dependencias instaladas y
 
 ### Descargar el código
 
-Para descargar el código, lo más conveniente es que realices un `fork` de este proyecto a tu cuenta personal haciendo click en [este link](https://github.com/gotoiot/app-fullstack-base/fork). Una vez que ya tengas el fork a tu cuenta, descargalo con este comando (acordate de poner tu usuario en el link):
+Para descargar el código, lo más conveniente es que realices un `fork` de este proyecto a tu cuenta personal haciendo click en [este link](https://github.com/AndreGarciaC/DAW_workspace). Una vez que ya tengas el fork a tu cuenta, descargalo con este comando (acordate de poner tu usuario en el link):
 
 ```
 git clone https://github.com/USER/app-fullstack-base.git
@@ -77,7 +85,7 @@ Al iniciar el servicio de la base de datos, si esta no está creada toma el arch
 
 En ese archivo está la configuración de la tabla `Devices` y otras configuraciones más. Si quisieras cambiar algunas configuraciones deberías modificar este archivo y crear nuevamente la base de datos para que se tomen en cuenta los cambios.
 
-Tené en cuenta que la base de datos se crea con permisos de superusuario por lo que no podrías borrar el directorio con tu usuario de sistema, para eso debés hacerlo con permisos de administrador. En ese caso podés ejecutar el comando `sudo rm -r db/data` para borrar el directorio completo.
+Ten en cuenta que la base de datos se crea con permisos de superusuario por lo que no podrías borrar el directorio con tu usuario de sistema, para eso debés hacerlo con permisos de administrador. En ese caso podés ejecutar el comando `sudo rm -r db/data` para borrar el directorio completo.
 
 </details>
 
@@ -88,13 +96,6 @@ En esta sección vas a encontrar las características más relevantes del proyec
 
 <details><summary><b>Mira los detalles más importantes de la aplicación</b></summary><br>
 <br>
-
-### Arquitectura de la aplicación
-
-Como ya pudiste ver, la aplicación se ejecuta sobre el ecosistema Docker, y en esta imagen podés ver el diagrama de arquitectura.
-
-![architecture](doc/architecture.png)
-
 ### El cliente web
 
 El cliente web es una Single Page Application que se comunica con el servicio en NodeJS mediante JSON a través de requests HTTP. Puede consultar el estado de dispositivos en la base de datos (por medio del servicio en NodeJS) y también cambiar el estado de los mismos. Los estilos del código están basados en **Material Design**.
@@ -155,47 +156,132 @@ En la siguiente ilustración podés ver cómo está organizado el proyecto para 
 En esta sección podés ver los detalles específicos de funcionamiento del código y que son los siguientes.
 
 <details><summary><b>Mira los detalles de implementación</b></summary><br>
-
-### Agregar un dispositivo
-
-Completá los pasos para agregar un dispositivo desde el cliente web.
-
 ### Frontend
 
-Completá todos los detalles sobre cómo armaste el frontend, sus interacciones, etc.
+Al momento de lanzar la aplicación, el usuario interactúa con un modal de bienvenida, en la cual es posible ingresar nombre y edad para identificar a la persona en aquel momento. Sin embargo, no son campos obligatorios.
+
+<a>
+    <img src="doc/bienvenida_usr.png" alt="logo" align="center" width="100%"/>
+</a>
+
+Página principal
+
+<a>
+    <img src="doc/inicio_usr.png" alt="logo" align="center" width="100%"/>
+</a>
+
+*La página principal incluye una barra de navegación en donde se puede visualizar el nombre de la aplicación a la izquierda y el saludo al usuario en la derecha.
+
+*Posteriormente, se visualiza un carrusel que, mediante gifs, describe los cinco tipos de dispositivos que pueden ser controlados en el hogar. 
+
+*De igual manera, se visualiza el título de la app como un header de mayor tamaño y bajo a este dos botones: **Resumen** y **Nuevo**. 
+
+​	**Resumen:** Consulta a la base de datos todos los dispositivos existentes en la tabla Devices. Los despliega en un componente collection-avatar en donde se visualiza su información a través de un logo, nombre, descripción, control tipo switch o rango y un botón para eliminarlo.
+
+<a>
+    <img src="doc/lista_dispositivos.png" alt="logo" align="center" width="100%"/>
+</a>
+
+​	**Nuevo:** Abre un modal en el cual se ingresan los datos del nuevo dispositivo para ser agregado en la tabla Devices de la base de datos. En el caso de dejar un campo en blanco no es posible realizar el post en la dB. Todo dispositivo inicia con estado en cero, es decir, apagado.
+
+<a>
+    <img src="doc/agregar_disp.png" alt="logo" align="center" width="100%"/>
+</a>
+
+<a>
+    <img src="doc/error.png" alt="logo" align="center" width="100%"/>
+</a>
+
+Por último, se encontratá un footer donde el usuario puede redirigirse a la redacción de un correo electrónico para la autora del proyecto final así como su perfil en LinkedIn. 
 
 ### Backend
 
-Completá todos los detalles de funcionamiento sobre el backend, sus interacciones con el cliente web, la base de datos, etc.
+<a>
+    <img src="doc/db_lista.png" alt="logo" align="center" width="100%"/>
+</a>
 
-<details><summary><b>Ver los endpoints disponibles</b></summary><br>
 
-Completá todos los endpoints del backend con los metodos disponibles, los headers y body que recibe, lo que devuelve, ejemplos, etc.
+Las rutas utilizadas en el backend para la interacción con la base de datos corresponden a:
 
-1) Devolver el estado de los dispositivos.
+1) Listar los dispositivos.
 
-```json
-{
-    "method": "get",
-    "request_headers": "application/json",
-    "request_body": "",
-    "response_code": 200,
-    "request_body": {
-        "devices": [
-            {
-                "id": 1,
-                "status": true,
-                "description": "Kitchen light"
-            }
-        ]
-    },
-}
+```javascript
+app.get('/devices/', function(req, res, next) {
+    utils.query("Select * from Devices",function(err,ans){
+        if(err){
+            res.send(err).status(400);
+            return;
+        }
+        res.send(ans);
+    });
+
+});
 ```
 
-</details>
+1) Obtener estado de los dispositivos.
 
-</details>
+```javascript
+app.get('/devices/:id', function(req, res) {
+    let filter_data = devices.filter(item => item.id == req.params.id);
+    utils.query("Select * from Devices where id = ? and nombre ?",[req.params.id, req.params.nombre],function(err,ans){
+        if(err){
+            res.send(err).status(400);
+            return;
+        }
+        res.send(ans);
+    });
+});
+```
 
+1) Agregar dispositivo.
+
+```javascript
+app.post('/devices/', function(req, res) {
+      utils.query("INSERT INTO Devices (id,name,description,state,type) VALUES (?, ?, ?, ?, ?);",[req.body.id, req.body.name, req.body.description,req.body.state, req.body.type],function(err,ans){
+        if(err){
+            res.send(err).status(400);
+            return;
+        }
+        res.send(ans);
+        console.log("Resp post"+ans);
+    });
+});
+```
+
+1) Eliminar dispositivo.
+
+```javascript
+app.delete('/devices/', function(req, res) {
+    console.log("Eliminar disp id= "+req.body.id);
+    utils.query("DELETE FROM Devices WHERE id = ?;",[req.body.id],function(err,ans){
+      if(err){
+          res.send(err).status(400);
+          return;
+      }
+      res.send(ans);
+      console.log("Resp post"+ans);
+  });
+});
+```
+
+1) Modificar dispositivo.
+
+```javascript
+app.put('/devices/', function(req, res) {
+    console.log("Update disp id= "+req.body.id);
+    utils.query("UPDATE Devices SET state = ? WHERE id = ?;",[req.body.state,req.body.id],function(err,ans){
+      if(err){
+          res.send(err).status(400);
+          return;
+      }
+      res.send(ans);
+      console.log("Resp post"+ans);
+  });
+});
+```
+
+
+## 
 
 ## Tecnologías utilizadas 🛠️
 
