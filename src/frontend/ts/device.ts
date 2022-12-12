@@ -1,7 +1,7 @@
 class Device{
   public id: number;
   public name: string;
-  public state: boolean;
+  public state: number;
   public description: string;
   public type: number;
 }

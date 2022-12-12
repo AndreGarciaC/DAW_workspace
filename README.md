@@ -1,5 +1,5 @@
-<a href="https://www.gotoiot.com/">
-    <img src="doc/gotoiot-logo.png" alt="logo" title="Goto IoT" align="right" width="60" height="60" />
+<a>
+    <img src="doc/title.png" alt="logo" align="center" width="100%"/>
 </a>
 
 Web App Full Stack Base
@@ -190,7 +190,7 @@ Completá todos los endpoints del backend con los metodos disponibles, los heade
         ]
     },
 }
-``` 
+```
 
 </details>
 

@@ -41,4 +41,10 @@ span.negrita{
 #app_title
 {
     font-family: "Fredericka the Great", serif;
+    text-align: center;
 }
+
+input[type="range"] {
+    width: 35%;
+    margin: 0;
+  }

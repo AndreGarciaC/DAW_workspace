@@ -46,7 +46,20 @@ app.post('/devices/', function(req, res) {
 });
 
 app.delete('/devices/', function(req, res) {
-    utils.query("DELETE FROM Devices WHERE id = ? AND description = ?;",[req.body.id,req.body.description],function(err,ans){
+    console.log("Eliminar disp id= "+req.body.id);
+    utils.query("DELETE FROM Devices WHERE id = ?;",[req.body.id],function(err,ans){
+      if(err){
+          res.send(err).status(400);
+          return;
+      }
+      res.send(ans);
+      console.log("Resp post"+ans);
+  });
+});
+
+app.put('/devices/', function(req, res) {
+    console.log("Update disp id= "+req.body.id);
+    utils.query("UPDATE Devices SET state = ? WHERE id = ?;",[req.body.state,req.body.id],function(err,ans){
       if(err){
           res.send(err).status(400);
           return;
