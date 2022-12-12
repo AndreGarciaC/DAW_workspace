@@ -21,26 +21,6 @@ app.get('/devices/', function(req, res, next) {
         res.send(ans);
     });
 
-    /*devices = [
-        { 
-            'id': 1, 
-            'name': 'Lampara 1', 
-            'description': 'Luz living', 
-            'state': 0, 
-            'type': 1, 
-        },
-        { 
-            'id': 2, 
-            'name': 'Ventilador 1', 
-            'description': 'Ventilador Habitacion', 
-            'state': 1, 
-            'type': 2, 
-        },
-    ]
-    setTimeout(()=>{
-        res.send(JSON.stringify(devices)).status(200);//Transforma el objeto JSON en string
-    },2000);*/
-
 });
 
 app.get('/devices/:id', function(req, res) {
@@ -55,7 +35,6 @@ app.get('/devices/:id', function(req, res) {
 });
 
 app.post('/devices/', function(req, res) {
-   // utils.query("Update Devices set state = ? where id = ? ",[req.body.state, req.body.id],function(err,ans){
       utils.query("INSERT INTO Devices (id,name,description,state,type) VALUES (?, ?, ?, ?, ?);",[req.body.id, req.body.name, req.body.description,req.body.state, req.body.type],function(err,ans){
         if(err){
             res.send(err).status(400);
@@ -66,6 +45,16 @@ app.post('/devices/', function(req, res) {
     });
 });
 
+app.delete('/devices/', function(req, res) {
+    utils.query("DELETE FROM Devices WHERE id = ? AND description = ?;",[req.body.id,req.body.description],function(err,ans){
+      if(err){
+          res.send(err).status(400);
+          return;
+      }
+      res.send(ans);
+      console.log("Resp post"+ans);
+  });
+});
 
 app.listen(PORT, function(req, res) {
     console.log("NodeJS API running correctly");

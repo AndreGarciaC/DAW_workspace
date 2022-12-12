@@ -38,27 +38,31 @@ class Main implements EventListenerObject, HandleResponse {
     dvc_descp: string,
     dvc_type: number
   ) {
-    let json = {
-      id: dvc_id,
-      name: dvc_name,
-      state: dvc_stt,
-      description: dvc_descp,
-      type: dvc_type,
-    };
-    console.log("add "+json);
-    this.framework.ejecutarRequest(
-      "POST",
-      "http://localhost:8000/Devices",
-      this,
-      json
-    );
+    if (dvc_id == null || dvc_name == "" || dvc_stt == null || dvc_descp == "" || dvc_type== null){
+      alert("No es posible agregar dispositivo. Existen campos vacíos.");
+    }
+    else{
+      let json = {
+        id: dvc_id,
+        name: dvc_name,
+        state: dvc_stt,
+        description: dvc_descp,
+        type: dvc_type,
+      };
+      this.framework.ejecutarRequest(
+        "POST",
+        "http://localhost:8000/Devices",
+        this,
+        json
+      );
+    }
   }
 
   ask_server_delete_device() {
     let json = { id: 1, state: 0 };
     this.framework.ejecutarRequest(
       "DELETE",
-      "http://localhost:8000/deviceChange",
+      "http://localhost:8000/deviceDel",
       this,
       json
     );
@@ -71,16 +75,22 @@ class Main implements EventListenerObject, HandleResponse {
     for (let disp of dvcs_list) {
       grilla += ` <li class="collection-item avatar">`;
 
-      if (disp.type == 1) {
+      if (disp.type == 0) {
         grilla += `<img src="static/images/lightbulb.png" alt="" class="circle"> `;
-      } else {
+      }  if (disp.type == 1) {
+        grilla += `<img src="static/images/window.png" alt="" class="circle"> `;
+      } if (disp.type == 2) {
+        grilla += `<img src="static/images/audio.png" alt="" class="circle"> `;
+      } if (disp.type == 3) {
+        grilla += `<img src="static/images/lightbulb.png" alt="" class="circle"> `;
+      } if (disp.type == 4) {
         grilla += `<img src="static/images/window.png" alt="" class="circle"> `;
       }
 
       grilla += ` <span class="title negrita">${disp.name}</span>
             <p>${disp.description}
             </p>
-            <a href="#!" class="secondary-content">
+            <a href="#!" class="secondary-content col s3">
               <div class="switch">
                   <label>
                     Off`;
@@ -95,7 +105,7 @@ class Main implements EventListenerObject, HandleResponse {
                   </label>
                 </div>
           </a>
-          <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+          <a id="dvc_del_btn" href="#!" class="secondary-content" btn-flat btn tooltipped data-position="bottom" data-tooltip="Eliminar dispositivo"><i class="material-icons">highlight_off</i></a>
           </li>`;
     }
     grilla += "</ul>";
@@ -127,8 +137,6 @@ class Main implements EventListenerObject, HandleResponse {
       btn.setAttribute("disabled", "");
       var btn = document.getElementById("btn_add");
       btn.removeAttribute("disabled");
-      var btn = document.getElementById("btnDlt");
-      btn.removeAttribute("disabled");
     } else if (objEvento.id.startsWith("cb_")) {
       let idDisp = objEvento.id.substring(3);
 
@@ -153,6 +161,8 @@ class Main implements EventListenerObject, HandleResponse {
       document.getElementById("modal_dvc_btn").onclick = function () {
         instance.close();
       };
+    } else if (objEvento.id == "dvc_del_btn") {
+      console.log("clicked");
     } else {
       objEvento = <HTMLElement>objEvento.parentElement;
     }
@@ -196,6 +206,8 @@ window.addEventListener("load", () => {
   btn_add.addEventListener("click", main);
   let btnM_dvc = document.getElementById("modal_dvc_btn");
   btnM_dvc.addEventListener("click", main);
+  let btn_del_dvc = document.getElementById("dvc_del_btn");
+  btn_del_dvc.addEventListener("click",main);
 });
 
 function mostrar(main: Main) {
